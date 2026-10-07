@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Números del Gol: Máximos Anotadores en los Mundiales</title>
+    <!-- Cargamos Plotly directamente -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FAFAFA;
+            color: #222222;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            max-width: 800px;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #111111;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+        .meta {
+            font-size: 0.85rem;
+            color: #888888;
+            border-bottom: 1px solid #E0E0E0;
+            padding-bottom: 12px;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            font-size: 1.05rem;
+        }
+        #chart-container {
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        footer {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border-top: 1px solid #E0E0E0;
+            font-size: 0.85rem;
+            color: #777777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Los datos de los Botas de Oro de la Copa del Mundo</h1>
+        <p class="subtitle">Un recorrido visual por las mayores marcas goleadoras en la historia de los Mundiales (1930 - 2022).</p>
+        <div class="meta">Por <b>Visualización de Datos</b> • Actualizado en 2026</div>
+    </header>
+
+    <main>
+        <section class="intro-text">
+            <p>A lo largo de 22 ediciones de la Copa Mundial de la FIFA, obtener el título de máximo goleador ha requerido rendimientos legendarios. Desde las 13 anotaciones de Just Fontaine en Suecia 1958 hasta los esfuerzos contemporáneos de Kylian Mbappé en Catar 2022, los datos reflejan la evolución del fútbol mundial.</p>
+        </section>
+
+        <!-- Contenedor de la gráfica -->
+        <div id="chart-container">
+            <div id="plotly-graph"></div>
+        </div>
+
+        <section class="intro-text">
+            <h2>Hallazgos Clave del Análisis</h2>
+            <p>Al analizar la evolución histórica de los máximos anotadores, destacan tres aspectos fundamentales:</p>
+            <ul>
+                <li><b>El récord inalcanzable:</b> Just Fontaine anotó 13 goles en Suecia 1958, una marca que no ha vuelto a superarse en más de seis décadas.</li>
+                <li><b>Tendencia a la baja:</b> A partir de la década de 1980, la cantidad media de goles para obtener la Bota de Oro se estabilizó en torno a los 6 goles por torneo.</li>
+                <li><b>El resurgimiento moderno:</b> Kylian Mbappé en 2022 rompió la racha de torneos con 6 goles al alcanzar las 8 anotaciones en Catar.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Fuente de datos: Registros Históricos de la FIFA • Creado con Plotly & GitHub Pages</p>
+    </footer>
+
+    <!-- Script único con los datos y la gráfica -->
+    <script>
+        const data = [
+          {y: "Multiple Winners (Multiple, 1962)", x: 4, cat: "Edición con menos goles", color: "#388E3C"},
+          {y: "Oldřich Nejedlý (Czechoslovakia, 1934)", x: 5, cat: "Edición con menos goles", color: "#388E3C"},
+          {y: "Miroslav Klose (Germany, 2006)", x: 5, cat: "Edición con menos goles", color: "#388E3C"},
+          {y: "Thomas Müller (Germany, 2010)", x: 5, cat: "Edición con menos goles", color: "#388E3C"},
+          {y: "Mario Kempes (Argentina, 1978)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Paolo Rossi (Italy, 1982)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Gary Lineker (England, 1986)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Salvatore Schillaci (Italy, 1990)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Hristo Stoichkov (Bulgaria, 1994)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Davor Šuker (Croatia, 1998)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "James Rodríguez (Colombia, 2014)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Harry Kane (England, 2018)", x: 6, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Leônidas (Brazil, 1938)", x: 7, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Grzegorz Lato (Poland, 1974)", x: 7, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Guillermo Stábile (Argentina, 1930)", x: 8, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Ademir (Brazil, 1950)", x: 8, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Ronaldo (Brazil, 2002)", x: 8, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Kylian Mbappé (France, 2022)", x: 8, cat: "+ Alegre / Reciente", color: "#FBC02D"},
+          {y: "Eusébio (Portugal, 1966)", x: 9, cat: "Otras ediciones", color: "#00796B"},
+          {y: "Gerd Müller (West Germany, 1970)", x: 10, cat: "Récord histórico (+10 goles)", color: "#E64A19"},
+          {y: "Sándor Kocsis (Hungary, 1954)", x: 11, cat: "Récord histórico (+10 goles)", color: "#E64A19"},
+          {y: "Just Fontaine (France, 1958)", x: 13, cat: "Récord histórico (+10 goles)", color: "#D32F2F"}
+        ];
+
+        const categories = [...new Set(data.map(item => item.cat))];
+        const traces = categories.map(cat => {
+            const group = data.filter(d => d.cat === cat);
+            return {
+                x: group.map(d => d.x),
+                y: group.map(d => d.y),
+                mode: 'markers+text',
+                name: cat,
+                marker: { size: 11, color: group[0].color },
+                text: group.map(d => d.x),
+                textposition: 'middle right',
+                textfont: { size: 10, color: '#444' },
+                hovertemplate: '<b>%{y}</b><br>Goles anotados: <b>%{x}</b><extra></extra>'
+            };
+        });
+
+        const layout = {
+            title: { text: '<b>Distribución de goles anotados por edición</b>', font: { size: 16, color: '#222' } },
+            xaxis: { title: 'Goles Anotados', range: [3.5, 14.5], dtick: 1, showgrid: true, gridcolor: '#F0F0F0' },
+            yaxis: { title: '', showgrid: true, gridcolor: '#F8F8F8', tickfont: { size: 11 } },
+            paper_bgcolor: '#FFFFFF',
+            plot_bgcolor: '#FFFFFF',
+            margin: { l: 230, r: 260, t: 50, b: 50 },
+            height: 750,
+            shapes: [{
+                type: 'line',
+                x0: 7.1, x1: 7.1,
+                y0: -0.5, y1: 21.5,
+                line: { color: '#BDBDBD', width: 1.2, dash: 'dash' }
+            }],
+            annotations: [
+                {
+                    xref: 'paper', yref: 'paper', x: 1.30, y: 0.90,
+                    text: "<span style='font-size:22px; color:#C2185B; font-weight:bold;'>13 Goles</span><br>" +
+                          "<span style='font-size:11px; color:#555;'>Máximo récord en un solo Mundial<br>logrado por Just Fontaine (1958).</span>",
+                    showarrow: false, align: 'left'
+                },
+                {
+                    xref: 'paper', yref: 'paper', x: 1.30, y: 0.65,
+                    text: "<span style='font-size:22px; color:#C2185B; font-weight:bold;'>7.1 Goles</span><br>" +
+                          "<span style='font-size:11px; color:#555;'>Promedio histórico de goles del<br>máximo anotador por torneo.</span>",
+                    showarrow: false, align: 'left'
+                }
+            ]
+        };
+
+        Plotly.newPlot('plotly-graph', traces, layout, {responsive: true});
+    </script>
+</body>
+</html>
